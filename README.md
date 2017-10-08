@@ -1,1 +1,5 @@
 # Proximity
+_You could open four or five apps, or just one_
+Proximity is the community amalgamation, designed as the single application for consumers to explore businesses.  No longer should users download one app per business that they like, but instead, all businesses would house their application within Proximity.  Users would be directed to a home page with all apps that they star, and they could manually navigate to any business' current in-house application.  Additionally, Proximity provides location-based business adsense and services by using the phone's GPS coordinates.  If a user comes within proximity of a business, that business's custom application or webpage would show, such as the menu or a special discount.  This encourages users to walk to business locations rather than shop online, thus giving businesses a better opportunity to provide positive experiences.  
+ _/r/place_
+ Want to claim your way to fame?  Proximity provides a second way to claim space on the map.  The alternative to business claiming would be user claiming 
