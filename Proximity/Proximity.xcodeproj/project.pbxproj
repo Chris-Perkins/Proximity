@@ -12,6 +12,8 @@
 		221EECB61F89848600700EAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221EECB41F89848600700EAC /* Main.storyboard */; };
 		221EECB81F89848600700EAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 221EECB71F89848600700EAC /* Assets.xcassets */; };
 		221EECBB1F89848600700EAC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221EECB91F89848600700EAC /* LaunchScreen.storyboard */; };
+		221EECC31F8990A700700EAC /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EECC21F8990A700700EAC /* HelperFunctions.swift */; };
+		221EECC51F899CC200700EAC /* SavedLocationClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EECC41F899CC200700EAC /* SavedLocationClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		221EECB71F89848600700EAC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		221EECBA1F89848600700EAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		221EECBC1F89848600700EAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		221EECC21F8990A700700EAC /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
+		221EECC41F899CC200700EAC /* SavedLocationClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLocationClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 				221EECB71F89848600700EAC /* Assets.xcassets */,
 				221EECB91F89848600700EAC /* LaunchScreen.storyboard */,
 				221EECBC1F89848600700EAC /* Info.plist */,
+				221EECC21F8990A700700EAC /* HelperFunctions.swift */,
+				221EECC41F899CC200700EAC /* SavedLocationClass.swift */,
 			);
 			path = Proximity;
 			sourceTree = "<group>";
@@ -137,7 +143,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				221EECB31F89848600700EAC /* ViewController.swift in Sources */,
+				221EECC51F899CC200700EAC /* SavedLocationClass.swift in Sources */,
 				221EECB11F89848600700EAC /* AppDelegate.swift in Sources */,
+				221EECC31F8990A700700EAC /* HelperFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +285,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DB8SUTA9JU;
 				INFOPLIST_FILE = Proximity/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.temporaryID.Proximity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -292,6 +301,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DB8SUTA9JU;
 				INFOPLIST_FILE = Proximity/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.temporaryID.Proximity;
 				PRODUCT_NAME = "$(TARGET_NAME)";

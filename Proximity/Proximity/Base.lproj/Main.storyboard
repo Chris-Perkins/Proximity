@@ -1,24 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="Proximity" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c2i-Uu-t3a">
+                                <rect key="frame" x="0.0" y="100" width="375" height="567"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cCa-CX-DtO">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" restorationIdentifier="statusBarView" translatesAutoresizingMaskIntoConstraints="NO" id="oPC-Bf-Z1k">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="WB3-7C-ofc"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oJo-2S-HVO">
+                                        <rect key="frame" x="166" y="58" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.29198133949999999" green="0.4580289125" blue="0.91091817620000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="Fry-F5-Wwv"/>
+                                    <constraint firstItem="oJo-2S-HVO" firstAttribute="centerX" secondItem="cCa-CX-DtO" secondAttribute="centerX" id="fe1-7f-0OR"/>
+                                    <constraint firstItem="oJo-2S-HVO" firstAttribute="top" secondItem="oPC-Bf-Z1k" secondAttribute="bottom" constant="8" id="hMU-6V-LES"/>
+                                    <constraint firstItem="oPC-Bf-Z1k" firstAttribute="leading" secondItem="cCa-CX-DtO" secondAttribute="leading" id="iI8-iB-Cnc"/>
+                                    <constraint firstAttribute="bottom" secondItem="oJo-2S-HVO" secondAttribute="bottom" constant="21" id="w5l-H5-Nme"/>
+                                    <constraint firstAttribute="trailing" secondItem="oPC-Bf-Z1k" secondAttribute="trailing" id="xhe-bR-wzn"/>
+                                    <constraint firstItem="oPC-Bf-Z1k" firstAttribute="top" secondItem="cCa-CX-DtO" secondAttribute="top" id="zjJ-E8-BeB"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="c2i-Uu-t3a" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="0AX-aX-WhF"/>
+                            <constraint firstItem="c2i-Uu-t3a" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="HlH-Pl-L8r"/>
+                            <constraint firstItem="c2i-Uu-t3a" firstAttribute="top" secondItem="cCa-CX-DtO" secondAttribute="bottom" id="Rmk-7R-eKD"/>
+                            <constraint firstItem="c2i-Uu-t3a" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="SRx-pd-dSn"/>
+                            <constraint firstItem="cCa-CX-DtO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="U2Y-Q9-MQD"/>
+                            <constraint firstItem="cCa-CX-DtO" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="oIJ-8Q-uhW"/>
+                            <constraint firstItem="cCa-CX-DtO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="slN-ZJ-Isw"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="label" destination="oJo-2S-HVO" id="kn4-S0-rPn"/>
+                        <outlet property="webView" destination="c2i-Uu-t3a" id="ygL-Aq-rnB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="33.733133433283363"/>
         </scene>
     </scenes>
 </document>

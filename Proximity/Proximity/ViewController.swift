@@ -7,19 +7,27 @@
 //
 
 import UIKit
+import CoreLocation
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 
+    @IBOutlet weak var webView: UIWebView!
+    @IBOutlet weak var label: UILabel!
+    
+    private var locationHelper = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        label.text = "Proximity"
+        label.setDefaultProperties()
+        
+        webView.loadRequest(URLRequest(url: URL(string: "https://www.mcdonalds.com/us/en-us.html")!))
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 
