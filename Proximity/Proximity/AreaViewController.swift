@@ -10,14 +10,25 @@ import CoreLocation
 import UIKit
 import MapKit
 
-class AreaViewController: UIViewController, CLLocationManagerDelegate {
+class AreaViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     //Map
     @IBOutlet weak var map: MKMapView!
+    var tileOverlay:MKTileOverlay?
+    var gridOverlay:MKTileOverlay = GridTileOverlay()
 
     let manager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        map.isZoomEnabled = false
+        map.isScrollEnabled = false
+        map.isUserInteractionEnabled = false
+        
+        gridOverlay = GridTileOverlay()
+        gridOverlay.canReplaceMapContent = false
+        map.add(gridOverlay)
+        map.delegate = self
 
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
@@ -35,6 +46,11 @@ class AreaViewController: UIViewController, CLLocationManagerDelegate {
         
         map.setRegion(region, animated: true)
         self.map.showsUserLocation = true
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        return GridTileOverlayRenderer(overlay: overlay)
     }
 
 }
