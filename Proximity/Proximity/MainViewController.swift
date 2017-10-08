@@ -74,6 +74,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     // Requests the current location info for this location
     private func getRequestForLocation(location: CLLocation) {
         webOverlayView.removeAllSubviews()
+        webOverlayView.alpha = 0
         
         var request = URLRequest(url: URL(string: String(format: (Constants.baseUrl + "/url/%d/%d"),
                                                          Int(location.coordinate.latitude * Constants.multiplier),
@@ -142,7 +143,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                                            constant: 0).isActive = true
                     }
                 } else if url != nil {
-                    self.webView.loadRequest(URLRequest(url: url!))
+                    DispatchQueue.main.sync {
+                        self.webView.loadRequest(URLRequest(url: url!))
+                    }
                 } else {
                     couldNotCompleteRequest = true
                 }
@@ -151,6 +154,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             }
             
             if couldNotCompleteRequest {
+                self.webOverlayView.alpha = 1
                 self.webView.loadHTMLString("", baseURL: nil)
             }
             
@@ -201,6 +205,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     // set's up the location manager
     @objc private func setupLocationManager() {
         self.webOverlayView.removeAllSubviews()
+        self.webOverlayView.alpha = 1
         
         // Ask for authorization from the User.
         
@@ -212,6 +217,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 locationManager.desiredAccuracy = kCLLocationAccuracyBest
                 locationManager.startUpdatingLocation()
                 locationManager.startMonitoringSignificantLocationChanges()
+                self.webOverlayView.alpha = 0
                 
             } else if status == .notDetermined {
                 self.locationManager.requestAlwaysAuthorization()
