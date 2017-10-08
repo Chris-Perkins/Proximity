@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 // Returns the height of the status bar (battery view, etc)
 func getStatusBarHeight() -> CGFloat {
@@ -260,6 +261,38 @@ extension NSLayoutConstraint {
                                   constant: -plusWidth)
     }
     
+    public static func clingToViewEdges(view: UIView, toView: UIView) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: toView,
+                           attribute: .top,
+                           relatedBy: .equal,
+                           toItem: view,
+                           attribute: .top,
+                           multiplier: 1,
+                           constant: 0).isActive = true
+        NSLayoutConstraint(item: toView,
+                           attribute: .left,
+                           relatedBy: .equal,
+                           toItem: view,
+                           attribute: .left,
+                           multiplier: 1,
+                           constant: 0).isActive = true
+        NSLayoutConstraint(item: toView,
+                           attribute: .right,
+                           relatedBy: .equal,
+                           toItem: view,
+                           attribute: .right,
+                           multiplier: 1,
+                           constant: 0).isActive = true
+        NSLayoutConstraint(item: toView,
+                           attribute: .bottom,
+                           relatedBy: .equal,
+                           toItem: view,
+                           attribute: .bottom,
+                           multiplier: 1,
+                           constant: 0).isActive = true
+    }
 }
 
 extension UITableView {
@@ -277,5 +310,21 @@ extension UITableView {
         }
         
         return cells
+    }
+}
+
+extension LocationInfo {
+    public static func getLocations() -> [LocationInfo] {
+        var locations = [LocationInfo]()
+        
+        // HEC building
+        locations.append(
+            LocationInfo(location: CLLocation(latitude: 28.60077,
+                                              longitude: -81.197489),
+                         websiteURL: URL(string: "https://map.ucf.edu/locations/116/harris-corporation-engineering-center/")!,
+                         radiusInMeters: 3000))
+        
+        return locations
+        
     }
 }

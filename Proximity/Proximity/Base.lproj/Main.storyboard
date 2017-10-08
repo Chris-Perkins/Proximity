@@ -36,14 +36,25 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MPG-uG-A91">
+                                        <rect key="frame" x="317" y="53" width="30" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="L16-il-vZF"/>
+                                            <constraint firstAttribute="width" constant="30" id="Vpn-L7-2Sq"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.29198133949999999" green="0.4580289125" blue="0.91091817620000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="MPG-uG-A91" secondAttribute="trailing" constant="28" id="7bw-vh-9RV"/>
                                     <constraint firstAttribute="height" constant="100" id="Fry-F5-Wwv"/>
+                                    <constraint firstItem="MPG-uG-A91" firstAttribute="top" secondItem="oPC-Bf-Z1k" secondAttribute="bottom" constant="3" id="JdK-Ce-Qiz"/>
                                     <constraint firstItem="oJo-2S-HVO" firstAttribute="centerX" secondItem="cCa-CX-DtO" secondAttribute="centerX" id="fe1-7f-0OR"/>
                                     <constraint firstItem="oJo-2S-HVO" firstAttribute="top" secondItem="oPC-Bf-Z1k" secondAttribute="bottom" constant="8" id="hMU-6V-LES"/>
                                     <constraint firstItem="oPC-Bf-Z1k" firstAttribute="leading" secondItem="cCa-CX-DtO" secondAttribute="leading" id="iI8-iB-Cnc"/>
                                     <constraint firstAttribute="bottom" secondItem="oJo-2S-HVO" secondAttribute="bottom" constant="21" id="w5l-H5-Nme"/>
+                                    <constraint firstAttribute="bottom" secondItem="MPG-uG-A91" secondAttribute="bottom" constant="17" id="x7G-qh-GvX"/>
                                     <constraint firstAttribute="trailing" secondItem="oPC-Bf-Z1k" secondAttribute="trailing" id="xhe-bR-wzn"/>
                                     <constraint firstItem="oPC-Bf-Z1k" firstAttribute="top" secondItem="cCa-CX-DtO" secondAttribute="top" id="zjJ-E8-BeB"/>
                                 </constraints>
@@ -63,6 +74,7 @@
                     </view>
                     <connections>
                         <outlet property="label" destination="oJo-2S-HVO" id="kn4-S0-rPn"/>
+                        <outlet property="rightButtonView" destination="MPG-uG-A91" id="SYB-1d-A4D"/>
                         <outlet property="webView" destination="c2i-Uu-t3a" id="ygL-Aq-rnB"/>
                     </connections>
                 </viewController>
