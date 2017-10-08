@@ -44,6 +44,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(willEnterForeground),
                                                name: .UIApplicationWillEnterForeground, object: nil)
+        postRequestForLocation(location: locationManager.location!, urlString: "urgay")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -161,7 +162,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 
                 if couldNotCompleteRequest {
                     DispatchQueue.main.sync {
-                        self.webOverlayView.alpha = 1
+                         self.webOverlayView.alpha = 1
                     }
                     self.webView.loadHTMLString("", baseURL: nil)
                 }
@@ -200,6 +201,17 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 { // check for http errors
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
                 print("response = \(response!)")
+                
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Invalid Request",
+                                                  message: ("This location is already claimed."),
+                                                      preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK",
+                                                  style: .cancel,
+                                                  handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                
             }
             
             let responseString = String(data: data, encoding: .utf8)
