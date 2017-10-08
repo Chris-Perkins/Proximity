@@ -25,7 +25,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     private var timer: DispatchSourceTimer?
     // The url string from the previous get request
     private var prevURLString: String = ""
+    // determines whether the user is on a website
+    private var userOnWebsite = false
+    // a button to switch urls
     private let switchURLButton = UIButton()
+    
+    
     // MARK: Overrides
     
     override func viewDidLoad() {
@@ -74,6 +79,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                                       handler: nil))
         
         self.present(alert, animated: true, completion: nil)
+        
+        // Set to indicate that no new locations are nearby. :(
+        if sender.image(for: .normal) == #imageLiteral(resourceName: "locationNearby") {
+            sender.setImage(#imageLiteral(resourceName: "noLocationsNearby"), for: .normal)
+        }
     }
     
     private func changeURL()
@@ -85,7 +95,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             couldNotCompleteRequest = true
             // Claimable area
             
-            DispatchQueue.global().sync {
+            DispatchQueue.main.async {
                 let button = UIButton()
                 button.setImage(#imageLiteral(resourceName: "locationClaim"), for: .normal)
                 button.addTarget(self, action: #selector(self.promptForURLView), for: .touchUpInside)
@@ -123,10 +133,16 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                                    attribute: .height,
                                    multiplier: 1,
                                    constant: 0).isActive = true
+                
+                // User is setting location ; not on a website
+                self.userOnWebsite = false
             }
         } else if url != nil {
             DispatchQueue.main.async {
                 self.webView.loadRequest(URLRequest(url: url!))
+                
+                // User loaded a website. They're on a website!
+                self.userOnWebsite = true
             }
         } else {
             couldNotCompleteRequest = true
@@ -161,7 +177,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     // Requests the current location info for this location
     private func getRequestForLocation(location: CLLocation) {
-        DispatchQueue.main.sync {
+        DispatchQueue.main.async {
             self.webOverlayView.removeAllSubviews()
             self.webOverlayView.alpha = 0
         }
@@ -193,19 +209,18 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 //let the icon glow
                 
                 // Do not reload if we're on the right website.
-                if self.prevURLString == "" && urlString != "" {
+                if self.userOnWebsite == false {
                     self.prevURLString = urlString
                     self.changeURL()
-                }
-                else {
+                } else {
                     if urlString == "" {
-                        DispatchQueue.main.sync {
+                        DispatchQueue.main.async {
                             self.switchURLButton.setImage(#imageLiteral(resourceName: "locationClaimWhite"), for: .normal)
                             self.switchURLButton.isUserInteractionEnabled = true
                         }
                         self.prevURLString = urlString
                     } else {
-                        DispatchQueue.main.sync {
+                        DispatchQueue.main.async {
                             self.switchURLButton.setImage(#imageLiteral(resourceName: "locationNearby"), for: .normal)
                             self.switchURLButton.isUserInteractionEnabled = true
                         }
@@ -255,6 +270,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                     self.present(alert, animated: true, completion: nil)
                 }
                 
+            } else {
+                DispatchQueue.main.async {
+                    self.getRequestForLocation(location: self.locationManager.location!)
+                }
             }
             
             let responseString = String(data: data, encoding: .utf8)
