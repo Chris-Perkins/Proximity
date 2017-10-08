@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21C8B1901F8A072100C4B4A5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C8B18F1F8A072100C4B4A5 /* CoreLocation.framework */; };
+		21DC48091F8A43D400735E49 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DC48081F8A43D400735E49 /* RootViewController.m */; };
+		21DC480E1F8A443800735E49 /* GridTileOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DC480D1F8A443800735E49 /* GridTileOverlay.m */; };
+		21DC48111F8A446200735E49 /* GridTileOverlayRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DC48101F8A446200735E49 /* GridTileOverlayRenderer.m */; };
+		21DC48141F8A449200735E49 /* WatermarkTileOverlayRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DC48131F8A449200735E49 /* WatermarkTileOverlayRenderer.m */; };
+		21DC48171F8A454700735E49 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21DC48161F8A454700735E49 /* RootViewController.xib */; };
 		221EECB11F89848600700EAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EECB01F89848600700EAC /* AppDelegate.swift */; };
 		221EECB31F89848600700EAC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EECB21F89848600700EAC /* MainViewController.swift */; };
 		221EECB61F89848600700EAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221EECB41F89848600700EAC /* Main.storyboard */; };
@@ -19,6 +25,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		21C8B18F1F8A072100C4B4A5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		21DC48071F8A43D300735E49 /* Proximity-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Proximity-Bridging-Header.h"; sourceTree = "<group>"; };
+		21DC48081F8A43D400735E49 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		21DC480B1F8A440B00735E49 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		21DC480C1F8A442300735E49 /* GridTileOverlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GridTileOverlay.h; sourceTree = "<group>"; };
+		21DC480D1F8A443800735E49 /* GridTileOverlay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GridTileOverlay.m; sourceTree = "<group>"; };
+		21DC48101F8A446200735E49 /* GridTileOverlayRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GridTileOverlayRenderer.m; sourceTree = "<group>"; };
+		21DC48121F8A447A00735E49 /* WatermarkTileOverlayRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatermarkTileOverlayRenderer.h; sourceTree = "<group>"; };
+		21DC48131F8A449200735E49 /* WatermarkTileOverlayRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WatermarkTileOverlayRenderer.m; sourceTree = "<group>"; };
+		21DC48151F8A44B500735E49 /* GridTileOverlayRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GridTileOverlayRenderer.h; sourceTree = "<group>"; };
+		21DC48161F8A454700735E49 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RootViewController.xib; path = ../../RootViewController.xib; sourceTree = "<group>"; };
 		221EECAD1F89848600700EAC /* Proximity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Proximity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		221EECB01F89848600700EAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		221EECB21F89848600700EAC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -39,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21C8B1901F8A072100C4B4A5 /* CoreLocation.framework in Frameworks */,
 				7C9EF12D644ADDFF8D4C3FAA /* Pods_Proximity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -67,6 +85,7 @@
 		221EECAF1F89848600700EAC /* Proximity */ = {
 			isa = PBXGroup;
 			children = (
+				21DC48071F8A43D300735E49 /* Proximity-Bridging-Header.h */,
 				221EECB01F89848600700EAC /* AppDelegate.swift */,
 				221EECB21F89848600700EAC /* MainViewController.swift */,
 				221EECB41F89848600700EAC /* Main.storyboard */,
@@ -76,6 +95,15 @@
 				221EECC21F8990A700700EAC /* HelperFunctions.swift */,
 				22CFAAF41F89D2000012134F /* AreaViewController.swift */,
 				22CFAAF61F89DAB40012134F /* Constants.swift */,
+				21DC480B1F8A440B00735E49 /* RootViewController.h */,
+				21DC48081F8A43D400735E49 /* RootViewController.m */,
+				21DC480C1F8A442300735E49 /* GridTileOverlay.h */,
+				21DC480D1F8A443800735E49 /* GridTileOverlay.m */,
+				21DC48101F8A446200735E49 /* GridTileOverlayRenderer.m */,
+				21DC48121F8A447A00735E49 /* WatermarkTileOverlayRenderer.h */,
+				21DC48131F8A449200735E49 /* WatermarkTileOverlayRenderer.m */,
+				21DC48151F8A44B500735E49 /* GridTileOverlayRenderer.h */,
+				21DC48161F8A454700735E49 /* RootViewController.xib */,
 			);
 			path = Proximity;
 			sourceTree = "<group>";
@@ -92,6 +120,7 @@
 		A018DDB5191B4779B7B099A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				21C8B18F1F8A072100C4B4A5 /* CoreLocation.framework */,
 				C4D121593033E2FD47287AD9 /* Pods_Proximity.framework */,
 			);
 			name = Frameworks;
@@ -132,6 +161,7 @@
 				TargetAttributes = {
 					221EECAC1F89848600700EAC = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -161,6 +191,7 @@
 			files = (
 				221EECBB1F89848600700EAC /* LaunchScreen.storyboard in Resources */,
 				221EECB81F89848600700EAC /* Assets.xcassets in Resources */,
+				21DC48171F8A454700735E49 /* RootViewController.xib in Resources */,
 				221EECB61F89848600700EAC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -221,9 +252,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				22CFAAF51F89D2000012134F /* AreaViewController.swift in Sources */,
+				21DC48091F8A43D400735E49 /* RootViewController.m in Sources */,
+				21DC48141F8A449200735E49 /* WatermarkTileOverlayRenderer.m in Sources */,
+				21DC480E1F8A443800735E49 /* GridTileOverlay.m in Sources */,
 				221EECB31F89848600700EAC /* MainViewController.swift in Sources */,
 				221EECB11F89848600700EAC /* AppDelegate.swift in Sources */,
 				221EECC31F8990A700700EAC /* HelperFunctions.swift in Sources */,
+				21DC48111F8A446200735E49 /* GridTileOverlayRenderer.m in Sources */,
 				22CFAAF71F89DAB40012134F /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -362,6 +397,7 @@
 			baseConfigurationReference = F685B18C5C6C8A618DEB810D /* Pods-Proximity.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DB8SUTA9JU;
 				INFOPLIST_FILE = Proximity/Info.plist;
@@ -369,6 +405,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.temporaryID.Proximity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Proximity/Proximity-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -379,6 +417,7 @@
 			baseConfigurationReference = 38E038452EC97FD5BADAF1FB /* Pods-Proximity.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DB8SUTA9JU;
 				INFOPLIST_FILE = Proximity/Info.plist;
@@ -386,6 +425,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.temporaryID.Proximity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Proximity/Proximity-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

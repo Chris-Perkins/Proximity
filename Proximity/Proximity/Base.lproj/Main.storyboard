@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13526" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="a4O-7f-hl7">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13524"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -83,30 +83,49 @@
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="33.733133433283363"/>
         </scene>
-        <!--Area View Controller-->
+        <!--Root View Controller-->
         <scene sceneID="7Ov-nl-nPf">
             <objects>
-                <viewController id="tk5-VJ-Nlz" customClass="AreaViewController" customModule="Proximity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="tk5-VJ-Nlz" customClass="RootViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bs0-J0-a6c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Nq-dd-e3d">
-                                <rect key="frame" x="164" y="20" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="0Nq-dd-e3d" firstAttribute="top" secondItem="ko8-5v-RLC" secondAttribute="top" id="6MN-Bq-0y4"/>
-                            <constraint firstItem="0Nq-dd-e3d" firstAttribute="centerX" secondItem="ko8-5v-RLC" secondAttribute="centerX" id="BA6-Ur-hQQ"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ko8-5v-RLC"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hed-fa-9Ve" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="817" y="34"/>
+            <point key="canvasLocation" x="816.79999999999995" y="33.733133433283363"/>
+        </scene>
+        <!--Area View Controller-->
+        <scene sceneID="CHf-k4-Z9y">
+            <objects>
+                <viewController id="a4O-7f-hl7" customClass="AreaViewController" customModule="Proximity" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SEC-Dc-w0k">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="RiJ-VL-aOx">
+                                <rect key="frame" x="0.0" y="23" width="375" height="647"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Jkp-vf-4XI" firstAttribute="bottom" secondItem="RiJ-VL-aOx" secondAttribute="bottom" id="PMX-ul-mej"/>
+                            <constraint firstItem="RiJ-VL-aOx" firstAttribute="top" secondItem="Jkp-vf-4XI" secondAttribute="top" id="Uad-n9-GBQ"/>
+                            <constraint firstItem="RiJ-VL-aOx" firstAttribute="leading" secondItem="Jkp-vf-4XI" secondAttribute="leading" id="pNA-eW-0Bo"/>
+                            <constraint firstItem="Jkp-vf-4XI" firstAttribute="trailing" secondItem="RiJ-VL-aOx" secondAttribute="trailing" id="tWw-8i-zjc"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Jkp-vf-4XI"/>
+                    </view>
+                    <connections>
+                        <outlet property="map" destination="RiJ-VL-aOx" id="Fhr-Ld-Hbs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AQQ-tP-1EC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1942" y="-198"/>
         </scene>
     </scenes>
 </document>
