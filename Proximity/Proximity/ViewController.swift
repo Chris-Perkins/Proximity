@@ -26,7 +26,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         
         locationInfoArray = LocationInfo.getLocations()
         
-        webView.loadRequest(URLRequest(url: URL(string: "https://www.mcdonalds.com/us/en-us.html")!))
+        //webView.loadRequest(URLRequest(url: URL(string: "https://www.mcdonalds.com/us/en-us.html")!))
+        getRequestForLocation(location: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -36,6 +37,27 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func getRequestForLocation(location: CLLocation?) {
+        var request = URLRequest(url: URL(string: "https://proximity-knighthacks.herokuapp.com/20/20")!)
+        request.httpMethod = "GET"
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(error!)")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response!)")
+            }
+            
+            let responseString = String(data: data, encoding: .utf8)
+            print("responseString = \(responseString!)")
+        }
+        task.resume()
     }
     
     private func setupLocationManager() {
