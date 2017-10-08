@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import SwiftyJSON
 
 class MainViewController: UIViewController, CLLocationManagerDelegate {
 
@@ -39,27 +40,39 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: GET/POST Requests
+    
+    // Requests the current location info for this location
     private func getRequestForLocation(location: CLLocation?) {
         var request = URLRequest(url: URL(string: "https://proximity-knighthacks.herokuapp.com/20/20")!)
         request.httpMethod = "GET"
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+            guard let data = data, error == nil else { // check for fundamental networking error
                 print("error=\(error!)")
                 return
             }
             
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 { // check for http errors
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
                 print("response = \(response!)")
             }
             
             let responseString = String(data: data, encoding: .utf8)
-            print("responseString = \(responseString!)")
+            print(responseString ?? "NIL RESPONSE")
+            if responseString != nil {
+                let urlString = String(describing: (JSON.init(parseJSON: responseString!))["message"])
+                
+                let url = URL(string: urlString)
+                if url != nil {
+                    self.webView.loadRequest(URLRequest(url: url!))
+                }
+            }
         }
         task.resume()
     }
     
+    // set's up the location manager
     private func setupLocationManager() {
         
         // Ask for authorization from the User.
@@ -104,6 +117,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             self.present(alert, animated: true, completion: nil)
         }
     }
+    
     
     private func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) -> CLLocation {
         let locValue:CLLocationCoordinate2D = locationManager.location!.coordinate
