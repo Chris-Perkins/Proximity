@@ -45,10 +45,13 @@
                                             <constraint firstAttribute="width" constant="30" id="Vpn-L7-2Sq"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVv-1R-M6k">
-                                        <rect key="frame" x="28" y="49" width="46" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Grid">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVv-1R-M6k">
+                                        <rect key="frame" x="28" y="53" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="KCs-5e-JIq"/>
+                                            <constraint firstAttribute="width" constant="30" id="stm-vo-Y32"/>
+                                        </constraints>
+                                        <state key="normal" image="mapIcon">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -58,9 +61,11 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.29198133949999999" green="0.4580289125" blue="0.91091817620000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="rVv-1R-M6k" firstAttribute="leading" secondItem="cCa-CX-DtO" secondAttribute="leading" constant="28" id="59N-aN-DXN"/>
                                     <constraint firstAttribute="trailing" secondItem="MPG-uG-A91" secondAttribute="trailing" constant="28" id="7bw-vh-9RV"/>
                                     <constraint firstAttribute="height" constant="100" id="Fry-F5-Wwv"/>
                                     <constraint firstItem="MPG-uG-A91" firstAttribute="top" secondItem="oPC-Bf-Z1k" secondAttribute="bottom" constant="3" id="JdK-Ce-Qiz"/>
+                                    <constraint firstAttribute="bottom" secondItem="rVv-1R-M6k" secondAttribute="bottom" constant="17" id="QIG-Mf-5Co"/>
                                     <constraint firstItem="oJo-2S-HVO" firstAttribute="centerX" secondItem="cCa-CX-DtO" secondAttribute="centerX" id="fe1-7f-0OR"/>
                                     <constraint firstItem="oJo-2S-HVO" firstAttribute="top" secondItem="oPC-Bf-Z1k" secondAttribute="bottom" id="hMU-6V-LES"/>
                                     <constraint firstItem="oPC-Bf-Z1k" firstAttribute="leading" secondItem="cCa-CX-DtO" secondAttribute="leading" id="iI8-iB-Cnc"/>
@@ -183,4 +188,7 @@
             <point key="canvasLocation" x="1669.5999999999999" y="33.733133433283363"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="mapIcon" width="256" height="256"/>
+    </resources>
 </document>
