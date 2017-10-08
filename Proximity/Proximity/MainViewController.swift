@@ -389,7 +389,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         
         timer = DispatchSource.makeTimerSource(queue: queue)
         
-        timer?.scheduleRepeating(deadline: .now(), interval: .seconds(20), leeway: .seconds(1))
+        timer?.scheduleRepeating(deadline: .now(), interval: .seconds(5), leeway: .seconds(1))
         
         timer?.setEventHandler { [weak self] in
             
