@@ -19,13 +19,18 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     private var locationManager = CLLocationManager()
     private var locationInfoArray = [LocationInfo]()
-    private var locationPermissionsButton: UIButton?
+    private var webOverlayView: UIView = UIView()
     private var timer: DispatchSourceTimer?
     
     // MARK: Overrides
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // cling to webview
+        self.webView.addSubview(webOverlayView)
+        NSLayoutConstraint.clingToViewEdges(view: webOverlayView,
+                                            toView: self.webView)
         
         label.text = "Proximity"
         label.setDefaultProperties()
@@ -45,8 +50,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         self.setupLocationManager()
         
         let button = UIButton()
-        button.setTitle("LMAO", for: .normal)
-        button.addTarget(self, action: #selector(updateCoordinates), for: .touchUpInside)
+        button.setImage(#imageLiteral(resourceName: "noLocationsNearby"), for: .normal)
+        //button.addTarget(self, action: #selector(updateCoordinates), for: .touchUpInside)
         self.view.addSubview(button)
         rightButtonView.backgroundColor = UIColor.clear
         NSLayoutConstraint.clingToViewEdges(view: button, toView: rightButtonView)
@@ -57,30 +62,19 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
         
-        self.locationPermissionsButton?.removeFromSuperview()
+        self.webOverlayView.removeAllSubviews()
     }
     
     @objc func willEnterForeground() {
         self.setupLocationManager()
     }
     
-    // MARK: Event functions
-    
-    @IBAction func claimPress(_ sender: Any) {
-        self.promptForURLView()
-    }
-    
-    // Updates the coordinates (debug method)
-    @objc private func updateCoordinates() {
-        self.label.text = String(format: "%d//%d",
-                                 Int(self.locationManager.location!.coordinate.latitude * Constants.multiplier * 100),
-                                 Int(self.locationManager.location!.coordinate.longitude * Constants.multiplier * 100))
-    }
-    
     // MARK: GET/POST Requests
     
     // Requests the current location info for this location
     private func getRequestForLocation(location: CLLocation) {
+        webOverlayView.removeAllSubviews()
+        
         var request = URLRequest(url: URL(string: String(format: (Constants.baseUrl + "/url/%d/%d"),
                                                          Int(location.coordinate.latitude * Constants.multiplier),
                                                          Int(location.coordinate.longitude * Constants.multiplier)))!)
@@ -105,7 +99,49 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 let urlString = String(describing: JSON.init(parseJSON: responseString!)["url"])
                 
                 let url = URL(string: urlString)
-                if url != nil {
+                if urlString == "" {
+                    couldNotCompleteRequest = true
+                    
+                    DispatchQueue.main.sync {
+                        let button = UIButton()
+                        button.setImage(#imageLiteral(resourceName: "locationClaim"), for: .normal)
+                        button.addTarget(self, action: #selector(self.promptForURLView), for: .touchUpInside)
+                        
+                        self.webOverlayView.addSubview(button)
+                        
+                        button.translatesAutoresizingMaskIntoConstraints = false
+                        
+                        NSLayoutConstraint(item: self.webOverlayView,
+                                           attribute: .centerX,
+                                           relatedBy: .equal,
+                                           toItem: button,
+                                           attribute: .centerX,
+                                           multiplier: 1,
+                                           constant: 0).isActive = true
+                        NSLayoutConstraint(item: self.webOverlayView,
+                                           attribute: .centerY,
+                                           relatedBy: .equal,
+                                           toItem: button,
+                                           attribute: .centerY,
+                                           multiplier: 1,
+                                           constant: 0).isActive = true
+                        NSLayoutConstraint(item: self.webOverlayView,
+                                           attribute: .width,
+                                           relatedBy: .equal,
+                                           toItem: button,
+                                           attribute: .width,
+                                           multiplier: 1.5
+                            ,
+                                           constant: 0).isActive = true
+                        NSLayoutConstraint(item: button,
+                                           attribute: .width,
+                                           relatedBy: .equal,
+                                           toItem: button,
+                                           attribute: .height,
+                                           multiplier: 1,
+                                           constant: 0).isActive = true
+                    }
+                } else if url != nil {
                     self.webView.loadRequest(URLRequest(url: url!))
                 } else {
                     couldNotCompleteRequest = true
@@ -164,7 +200,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     // set's up the location manager
     @objc private func setupLocationManager() {
-        self.locationPermissionsButton?.removeFromSuperview()
+        self.webOverlayView.removeAllSubviews()
         
         // Ask for authorization from the User.
         
@@ -218,13 +254,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     // Event function for NoLocation pressed
     private func createNoLocationButton() {
+        webOverlayView.removeAllSubviews()
+        
         let button = UIButton()
-        self.view.addSubview(button)
+        self.webOverlayView.addSubview(button)
         NSLayoutConstraint.clingToViewEdges(view: button, toView: self.webView)
         button.setImage(#imageLiteral(resourceName: "noLocationPermission"), for: .normal)
         button.addTarget(self, action: #selector(setupLocationManager), for: .touchUpInside)
-        
-        self.locationPermissionsButton = button
     }
     
     @objc private func promptForURLView() {
