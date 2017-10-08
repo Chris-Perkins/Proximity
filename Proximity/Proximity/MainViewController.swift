@@ -15,11 +15,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var rightButtonView: UIView!
+    @IBOutlet weak var claimButton: UIButton!
     
     private var locationManager = CLLocationManager()
     private var locationInfoArray = [LocationInfo]()
     private var locationPermissionsButton: UIButton?
     private var timer: DispatchSourceTimer?
+    
+    // MARK: Overrides
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +57,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         self.setupLocationManager()
     }
     
+    // MARK: Event functions
+    
+    @IBAction func claimPress(_ sender: Any) {
+        postRequestForLocation(location: locationManager.location!, urlString: "https://www.google.com/")
+    }
+    
     // MARK: GET/POST Requests
     
     // Requests the current location info for this location
@@ -84,6 +93,43 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                     self.webView.loadRequest(URLRequest(url: url!))
                 }
             }
+        }
+        task.resume()
+    }
+    
+    // Posts a url to the given coordinates
+    private func postRequestForLocation(location: CLLocation, urlString: String) {
+        var request = URLRequest(url: URL(string: String(format: (Constants.baseUrl + "/url/%d/%d"),
+                                                         Int(location.coordinate.latitude * Constants.multiplier),
+                                                         Int(location.coordinate.longitude * Constants.multiplier)))!)
+        request.httpMethod = "POST"
+        
+        let json: JSON = JSON.init(parseJSON: ("{\"url\": \"" + urlString + "\"}"))
+        
+        do {
+            let data:Data = try json.rawData()
+            request.httpBody = data
+        } catch let error as NSError {
+            print("Error: \(error.localizedDescription)")
+        } catch {}
+        
+        
+        request.value(forHTTPHeaderField: "Content-Type: application/json")
+        
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else { // check for fundamental networking error
+                print("error=\(error!)")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 { // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response!)")
+            }
+            
+            let responseString = String(data: data, encoding: .utf8)
+            print(responseString ?? "empty returned")
         }
         task.resume()
     }
@@ -148,7 +194,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     private func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) -> CLLocation {
         let locValue:CLLocationCoordinate2D = locationManager.location!.coordinate
         
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        label.text = "locations = \(locValue.latitude) \(locValue.longitude)"
+        
         
         return CLLocation(latitude: locValue.latitude,
                           longitude: locValue.longitude)
@@ -166,6 +213,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     // MARK: Repeating queue
+    
     private func startTimer() {
         let queue = DispatchQueue(label: "com.firm.app.timer", attributes: .concurrent)
         

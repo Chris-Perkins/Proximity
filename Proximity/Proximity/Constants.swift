@@ -8,7 +8,7 @@
 
 class Constants {
     // amount we multiply coordinates by
-    public static let multiplier: Double = 1_000_000
+    public static let multiplier: Double = 10_000
     
     public static let baseUrl = "https://proximity-knighthacks.herokuapp.com"
 }

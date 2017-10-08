@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import SwiftyJSON
 
 // Returns the height of the status bar (battery view, etc)
 func getStatusBarHeight() -> CGFloat {
@@ -326,5 +327,16 @@ extension LocationInfo {
         
         return locations
         
+    }
+}
+
+extension JSON {
+    func jsonToData(json: JSON) -> Data?{
+        do {
+            return try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted) as Data
+        } catch let myJSONError {
+            print(myJSONError)
+        }
+        return nil;
     }
 }

@@ -45,12 +45,27 @@
                                             <constraint firstAttribute="width" constant="30" id="Vpn-L7-2Sq"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wat-w8-C1k">
+                                        <rect key="frame" x="15" y="53" width="46" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="qXr-wL-eGc"/>
+                                        </constraints>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="claimPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Twa-Vd-AyY"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.29198133949999999" green="0.4580289125" blue="0.91091817620000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Wat-w8-C1k" secondAttribute="bottom" constant="17" id="5zl-ZU-CUT"/>
                                     <constraint firstAttribute="trailing" secondItem="MPG-uG-A91" secondAttribute="trailing" constant="28" id="7bw-vh-9RV"/>
                                     <constraint firstAttribute="height" constant="100" id="Fry-F5-Wwv"/>
                                     <constraint firstItem="MPG-uG-A91" firstAttribute="top" secondItem="oPC-Bf-Z1k" secondAttribute="bottom" constant="3" id="JdK-Ce-Qiz"/>
+                                    <constraint firstItem="Wat-w8-C1k" firstAttribute="leading" secondItem="cCa-CX-DtO" secondAttribute="leading" constant="15" id="Pz2-AD-YPh"/>
+                                    <constraint firstItem="Wat-w8-C1k" firstAttribute="top" secondItem="oPC-Bf-Z1k" secondAttribute="bottom" constant="3" id="X9z-3u-xfH"/>
                                     <constraint firstItem="oJo-2S-HVO" firstAttribute="centerX" secondItem="cCa-CX-DtO" secondAttribute="centerX" id="fe1-7f-0OR"/>
                                     <constraint firstItem="oJo-2S-HVO" firstAttribute="top" secondItem="oPC-Bf-Z1k" secondAttribute="bottom" constant="8" id="hMU-6V-LES"/>
                                     <constraint firstItem="oPC-Bf-Z1k" firstAttribute="leading" secondItem="cCa-CX-DtO" secondAttribute="leading" id="iI8-iB-Cnc"/>
@@ -74,6 +89,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="claimButton" destination="Wat-w8-C1k" id="Wey-yz-ZHZ"/>
                         <outlet property="label" destination="oJo-2S-HVO" id="kn4-S0-rPn"/>
                         <outlet property="rightButtonView" destination="MPG-uG-A91" id="SYB-1d-A4D"/>
                         <outlet property="webView" destination="c2i-Uu-t3a" id="ygL-Aq-rnB"/>
