@@ -9,20 +9,24 @@
 import CoreLocation
 import UIKit
 import MapKit
+import SwiftyJSON
 
 class AreaViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     //Map
     @IBOutlet weak var map: MKMapView!
     var tileOverlay:MKTileOverlay?
     var gridOverlay:MKTileOverlay = GridTileOverlay()
+    var gridData: JSON?
+    
+    private var timer: DispatchSourceTimer?
 
     let manager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        map.isZoomEnabled = false
-        map.isScrollEnabled = false
+        map.isZoomEnabled = true
+        map.isScrollEnabled = true
         map.isUserInteractionEnabled = false
         
         gridOverlay = GridTileOverlay()
@@ -36,6 +40,7 @@ class AreaViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
+        startTimer()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
@@ -85,4 +90,77 @@ class AreaViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         }
     }
 
+    // Requests the current location info for this location
+    private func getRequestForLocation(location: CLLocation) {
+        var request = URLRequest(url: URL(string: String(format: (Constants.baseUrl + "/area/%d/%d"),
+                                                         Int(location.coordinate.latitude * Constants.multiplier),
+                                                         Int(location.coordinate.longitude * Constants.multiplier)))!)
+        request.httpMethod = "GET"
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else { // check for fundamental networking error
+                print("error=\(error!)")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 { // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response!)")
+            }
+            
+            let responseString = String(data: data, encoding: .utf8)
+            print(responseString ?? "NIL RESPONSE")
+            if responseString != nil {
+                let json = JSON.init(parseJSON: responseString!)
+                
+                DispatchQueue.main.async {
+                    self.gridData = json
+                    
+                    for key in json {
+                        for key2 in key.1 {
+                            print(key2.0)
+                            let annotation = MKPointAnnotation()
+                            annotation.coordinate = CLLocationCoordinate2D(latitude: Double(key.0.floatValue!) / Constants.multiplier,
+                                                                           longitude: Double(key2.0.floatValue!) / Constants.multiplier)
+                            self.map.addAnnotation(annotation)
+                        }
+                    }
+                    
+                    //for key in json.array
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    
+    private func startTimer() {
+        let queue = DispatchQueue(label: "com.firm.app.timer", attributes: .concurrent)
+        
+        timer?.cancel()        // cancel previous timer if any
+        
+        timer = DispatchSource.makeTimerSource(queue: queue)
+        
+        timer?.scheduleRepeating(deadline: .now(), interval: .seconds(20), leeway: .seconds(1))
+        
+        timer?.setEventHandler { [weak self] in
+            
+            if self != nil {
+                if (self!.manager.location) != nil {
+                    self!.getRequestForLocation(location: self!.manager.location!);
+                }
+            }
+        }
+        
+        timer?.resume()
+    }
+    
+    private func stopTimer() {
+        timer?.cancel()
+        timer = nil
+    }
+    
+    private func getCoordinate(x: Double, y: Double) -> CGPoint {
+        return CGPoint(x: x, y: y)
+    }
 }

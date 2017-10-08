@@ -25,10 +25,10 @@
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     [[UIColor blackColor] setStroke];
     CGContextSetLineWidth(ctx, 100.0);
-    CGContextSetAlpha(ctx, 0);
+    CGContextSetAlpha(ctx, 1);
     CGContextStrokeRect(ctx, CGRectMake(0, 0, sz.width, sz.height));
     NSString *text = [NSString stringWithFormat:@"X=%d\nY=%d\nZ=%d",path.x,path.y,path.z];
-    [text drawInRect:rect withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20.0], NSForegroundColorAttributeName:[UIColor blackColor]}];
+    [text drawInRect:rect withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:10.0], NSForegroundColorAttributeName:[UIColor blackColor]}];
     UIImage *tileImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     NSData *tileData = UIImagePNGRepresentation(tileImage);

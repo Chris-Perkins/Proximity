@@ -15,6 +15,7 @@
 @implementation GridTileOverlayRenderer
 
 
+
 -(void)drawMapRect:(MKMapRect)mapRect zoomScale:(MKZoomScale)zoomScale inContext:(CGContextRef)context {
     NSLog(@"Rendering at (x,y):(%f,%f) with size (w,h):(%f,%f) zoom %f",mapRect.origin.x,mapRect.origin.y,mapRect.size.width,mapRect.size.height,21);
     CGRect rect = [self rectForMapRect:mapRect];
@@ -26,13 +27,14 @@
     path.y = mapRect.origin.y*21/tileOverlay.tileSize.width;
     path.z = log2(21)+20;
     
-    CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
-    CGContextSetLineWidth(context, 2.5);
+    //CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:arc4random()%255/255. green:arc4random()%255/255. blue:arc4random()%255/255. alpha:1].CGColor);
+    //CGContextSetLineWidth(context, 1000);
     CGContextStrokeRect(context, rect);
+    NSLog(@"X=%d\nY=%d\nZ=%d",path.x,path.y,path.z);
     
     UIGraphicsPushContext(context);
     NSString *text = [NSString stringWithFormat:@"X=%d\nY=%d\nZ=%d",path.x,path.y,path.z];
-    [text drawInRect:rect withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20.0/21],
+    [text drawInRect:rect withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:10],
                                            NSForegroundColorAttributeName:[UIColor blackColor]}];
     UIGraphicsPopContext();
     
