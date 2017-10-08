@@ -9,8 +9,10 @@
  
  Want to claim your way to fame?  Proximity provides a second way to claim space on the map.  Users can claim space and show off where they've been in the world by temporarily claiming tiles within a grid and placing any custom image.  Claimed tiles are reserved for a certain period of time so the user can show off to friends and passerbys with their image.
 
-### _The future of Proximity_
- Using our app, users are directed to a home page with all apps that they star and they can manually navigate to any business's current in-house application.
+### _The future of Proximity - Planned Features_
+ Want to claim your way to fame?  Proximity will provide a second way to claim space on the map.  Users can claim space and show off where they've been in the world by temporarily claiming tiles within a grid and placing any custom image.  Claimed tiles are reserved for a certain period of time so the user can show off to friends and passerbys with their image.
+ 
+ Want to see the Proximity world from above? Grid view would allow users to see and inspect the grid blocks around the area they are standing as a grid overlaid onto a map of the nearby area.
 
 ## Components
  Proximity is currently an iOS app and has a separate entity for the server.  See https://github.com/Chris-Perkins/Proximity-Server
