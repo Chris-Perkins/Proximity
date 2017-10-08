@@ -8,25 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		221EECB11F89848600700EAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EECB01F89848600700EAC /* AppDelegate.swift */; };
-		221EECB31F89848600700EAC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EECB21F89848600700EAC /* ViewController.swift */; };
+		221EECB31F89848600700EAC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EECB21F89848600700EAC /* MainViewController.swift */; };
 		221EECB61F89848600700EAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221EECB41F89848600700EAC /* Main.storyboard */; };
 		221EECB81F89848600700EAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 221EECB71F89848600700EAC /* Assets.xcassets */; };
 		221EECBB1F89848600700EAC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221EECB91F89848600700EAC /* LaunchScreen.storyboard */; };
 		221EECC31F8990A700700EAC /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EECC21F8990A700700EAC /* HelperFunctions.swift */; };
 		221EECC51F899CC200700EAC /* SavedLocationClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EECC41F899CC200700EAC /* SavedLocationClass.swift */; };
+		22CFAAF51F89D2000012134F /* AreaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CFAAF41F89D2000012134F /* AreaViewController.swift */; };
 		7C9EF12D644ADDFF8D4C3FAA /* Pods_Proximity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4D121593033E2FD47287AD9 /* Pods_Proximity.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		221EECAD1F89848600700EAC /* Proximity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Proximity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		221EECB01F89848600700EAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		221EECB21F89848600700EAC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		221EECB21F89848600700EAC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		221EECB51F89848600700EAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		221EECB71F89848600700EAC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		221EECBA1F89848600700EAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		221EECBC1F89848600700EAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		221EECC21F8990A700700EAC /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		221EECC41F899CC200700EAC /* SavedLocationClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLocationClass.swift; sourceTree = "<group>"; };
+		22CFAAF41F89D2000012134F /* AreaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaViewController.swift; sourceTree = "<group>"; };
 		38E038452EC97FD5BADAF1FB /* Pods-Proximity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Proximity.release.xcconfig"; path = "Pods/Target Support Files/Pods-Proximity/Pods-Proximity.release.xcconfig"; sourceTree = "<group>"; };
 		C4D121593033E2FD47287AD9 /* Pods_Proximity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Proximity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F685B18C5C6C8A618DEB810D /* Pods-Proximity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Proximity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Proximity/Pods-Proximity.debug.xcconfig"; sourceTree = "<group>"; };
@@ -66,13 +68,14 @@
 			isa = PBXGroup;
 			children = (
 				221EECB01F89848600700EAC /* AppDelegate.swift */,
-				221EECB21F89848600700EAC /* ViewController.swift */,
+				221EECB21F89848600700EAC /* MainViewController.swift */,
 				221EECB41F89848600700EAC /* Main.storyboard */,
 				221EECB71F89848600700EAC /* Assets.xcassets */,
 				221EECB91F89848600700EAC /* LaunchScreen.storyboard */,
 				221EECBC1F89848600700EAC /* Info.plist */,
 				221EECC21F8990A700700EAC /* HelperFunctions.swift */,
 				221EECC41F899CC200700EAC /* SavedLocationClass.swift */,
+				22CFAAF41F89D2000012134F /* AreaViewController.swift */,
 			);
 			path = Proximity;
 			sourceTree = "<group>";
@@ -217,7 +220,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				221EECB31F89848600700EAC /* ViewController.swift in Sources */,
+				22CFAAF51F89D2000012134F /* AreaViewController.swift in Sources */,
+				221EECB31F89848600700EAC /* MainViewController.swift in Sources */,
 				221EECC51F899CC200700EAC /* SavedLocationClass.swift in Sources */,
 				221EECB11F89848600700EAC /* AppDelegate.swift in Sources */,
 				221EECC31F8990A700700EAC /* HelperFunctions.swift in Sources */,

@@ -18,6 +18,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     private var locationManager = CLLocationManager()
     private var locationInfoArray = [LocationInfo]()
+    private var locationPermissionsButton: UIButton?
+    private var timer: DispatchSourceTimer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,15 +30,28 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         locationInfoArray = LocationInfo.getLocations()
         
         getRequestForLocation(location: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(willEnterForeground),
+                                               name: .UIApplicationWillEnterForeground, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         self.setupLocationManager()
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        
+        self.locationPermissionsButton?.removeFromSuperview()
+    }
+    
+    @objc func willEnterForeground() {
+        self.setupLocationManager()
     }
     
     // MARK: GET/POST Requests
@@ -76,6 +91,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     // set's up the location manager
     @objc private func setupLocationManager() {
+        self.locationPermissionsButton?.removeFromSuperview()
         
         // Ask for authorization from the User.
         
@@ -113,13 +129,17 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             let alert = UIAlertController(title: "Location Services Disabled",
                                           message: "Please enable Location Services.",
                                           preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Ok",
+            let okAction = UIAlertAction(title: "OK",
                                          style: .cancel,
                                          handler: nil)
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
             self.createNoLocationButton()
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        self.setupLocationManager()
     }
     
     
@@ -139,6 +159,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         NSLayoutConstraint.clingToViewEdges(view: button, toView: self.webView)
         button.setImage(#imageLiteral(resourceName: "noLocationPermission"), for: .normal)
         button.addTarget(self, action: #selector(setupLocationManager), for: .touchUpInside)
+        
+        self.locationPermissionsButton = button
     }
 }
 
