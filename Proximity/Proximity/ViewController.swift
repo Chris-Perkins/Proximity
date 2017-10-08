@@ -27,7 +27,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         
         locationInfoArray = LocationInfo.getLocations()
         
-        //webView.loadRequest(URLRequest(url: URL(string: "https://www.mcdonalds.com/us/en-us.html")!))
         getRequestForLocation(location: nil)
     }
     
@@ -71,6 +70,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
         task.resume()
     }
+
+    
+    // MARK: Location manager stuff. Ew.
     
     // set's up the location manager
     private func setupLocationManager() {
