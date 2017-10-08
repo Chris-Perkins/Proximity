@@ -41,7 +41,8 @@
     
     // load grid tile overlay
     self.gridOverlay = [[GridTileOverlay alloc] init];
-    self.gridOverlay.canReplaceMapContent=NO;
+    self.gridOverlay.canReplaceMapContent=YES;
+    self.gridOverlay.minimumZ = 22;
     [self.mapView addOverlay:self.gridOverlay level:MKOverlayLevelAboveLabels];
     
     // Do any additional setup after loading the view from its nib.

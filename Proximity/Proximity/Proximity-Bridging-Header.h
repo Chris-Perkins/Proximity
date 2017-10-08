@@ -5,3 +5,4 @@
 #import "RootViewController.h"
 #import "GridTileOverlay.h"
 #import "GridTileOverlayRenderer.h"
+#import "WatermarkTileOverlayRenderer.h"

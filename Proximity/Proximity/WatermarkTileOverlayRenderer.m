@@ -14,9 +14,9 @@
     
     [super drawMapRect:mapRect zoomScale:21 inContext:context];
     
-    /*CGRect rect = [self rectForMapRect:mapRect];
-    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:arc4random()%255/255. green:arc4random()%255/255. blue:arc4random()%255/255. alpha:0.2].CGColor);
-    CGContextFillRect(context, rect);*/
+    CGRect rect = [self rectForMapRect:mapRect];
+    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:arc4random()%255/255. green:arc4random()%255/255. blue:arc4random()%255/255. alpha:1].CGColor);
+    CGContextFillRect(context, rect);
     
     
     

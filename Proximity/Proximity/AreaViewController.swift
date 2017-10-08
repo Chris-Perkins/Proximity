@@ -27,8 +27,10 @@ class AreaViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         
         gridOverlay = GridTileOverlay()
         gridOverlay.canReplaceMapContent = false
+        
         map.add(gridOverlay)
         map.delegate = self
+
 
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
@@ -40,7 +42,7 @@ class AreaViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     {
         let location = locations[0]
         
-        let span:MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
+        let span:MKCoordinateSpan = MKCoordinateSpanMake(1 / Constants.multiplier, 1 / Constants.multiplier)
         let myLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         let region:MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
         
@@ -49,8 +51,38 @@ class AreaViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        
-        return GridTileOverlayRenderer(overlay: overlay)
+        /*if([overlay isKindOfClass:[MKTileOverlay class]]) {
+            MKTileOverlay *tileOverlay = (MKTileOverlay *)overlay;
+            MKTileOverlayRenderer *renderer = nil;
+            if([tileOverlay isKindOfClass:[GridTileOverlay class]]) {
+                #if ( OFFLINE_USE_CUSTOM_OVERLAY_RENDERER == 1 )
+                    renderer = [[GridTileOverlayRenderer alloc] initWithTileOverlay:tileOverlay];
+                #else
+                    renderer = [[MKTileOverlayRenderer alloc] initWithTileOverlay:tileOverlay];
+                #endif
+            } else {
+                //if(self.overlayType==CustomMapTileOverlayTypeGoogle) {
+                renderer = [[WatermarkTileOverlayRenderer alloc] initWithTileOverlay:tileOverlay];
+                /*} else {
+                 renderer = [[MKTileOverlayRenderer alloc] initWithTileOverlay:tileOverlay];
+                 }*/
+            }*/
+        var renderer:MKTileOverlayRenderer
+        if (overlay as? MKTileOverlay) != nil {
+            tileOverlay = (overlay as! MKTileOverlay)
+            if let gridTileOverlay = overlay as? GridTileOverlay {
+                renderer = GridTileOverlayRenderer(tileOverlay: gridTileOverlay)
+            }else{
+                renderer = WatermarkTileOverlayRenderer(tileOverlay: tileOverlay!)
+            }
+            
+            renderer.alpha = 0.5
+            
+            return renderer
+        } else {
+            renderer = (overlay as! GridTileOverlayRenderer)
+            return renderer
+        }
     }
 
 }

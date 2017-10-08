@@ -26,8 +26,8 @@
     path.y = mapRect.origin.y*21/tileOverlay.tileSize.width;
     path.z = log2(21)+20;
     
-    CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
-    CGContextSetLineWidth(context, 1.0/21);
+    CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
+    CGContextSetLineWidth(context, 2.5);
     CGContextStrokeRect(context, rect);
     
     UIGraphicsPushContext(context);
