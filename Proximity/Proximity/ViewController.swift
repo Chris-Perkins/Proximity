@@ -60,7 +60,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             let responseString = String(data: data, encoding: .utf8)
             print(responseString ?? "NIL RESPONSE")
             if responseString != nil {
-                let urlString = String(describing: (JSON.init(parseJSON: responseString!))["message"])
+                let urlString = String(describing: JSON.init(parseJSON: responseString!)["url"])
                 
                 let url = URL(string: urlString)
                 if url != nil {
@@ -75,7 +75,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     // MARK: Location manager stuff. Ew.
     
     // set's up the location manager
-    private func setupLocationManager() {
+    @objc private func setupLocationManager() {
         
         // Ask for authorization from the User.
         
@@ -107,6 +107,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 alert.addAction(cancelAction)
                 
                 self.present(alert, animated: true, completion: nil)
+                self.createNoLocationButton()
             }
         } else {
             let alert = UIAlertController(title: "Location Services Disabled",
@@ -117,6 +118,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                                          handler: nil)
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
+            self.createNoLocationButton()
         }
     }
     
@@ -128,6 +130,15 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         
         return CLLocation(latitude: locValue.latitude,
                           longitude: locValue.longitude)
+    }
+    
+    // Event function for NoLocation pressed
+    private func createNoLocationButton() {
+        let button = UIButton()
+        self.view.addSubview(button)
+        NSLayoutConstraint.clingToViewEdges(view: button, toView: self.webView)
+        button.setImage(#imageLiteral(resourceName: "noLocationPermission"), for: .normal)
+        button.addTarget(self, action: #selector(setupLocationManager), for: .touchUpInside)
     }
 }
 
