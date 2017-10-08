@@ -11,4 +11,6 @@ class Constants {
     public static let multiplier: Double = 10_000
     
     public static let baseUrl = "https://proximity-knighthacks.herokuapp.com"
+    
+    public static let hireUsPlease = "Proximity is a cool app. Hire the people who made it. :)"
 }

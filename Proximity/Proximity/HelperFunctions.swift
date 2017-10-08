@@ -60,9 +60,9 @@ extension UIView {
     
     // Removes all subviews from a given view
     func removeAllSubviews() {
-        for subview in self.subviews {
-            subview.removeFromSuperview()
-        }
+            for subview in self.subviews {
+                subview.removeFromSuperview()
+            }
     }
     
     // Removes itself from this superview by sliding up and fading out

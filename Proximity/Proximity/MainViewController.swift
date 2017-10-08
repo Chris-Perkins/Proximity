@@ -24,7 +24,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     // timer that loops every 20 seconds
     private var timer: DispatchSourceTimer?
     // The url string from the previous get request
-    private var prevURLString: String = "Proximity is a cool app. Hire the people who made it. :)"
+    private var prevURLString: String = ""
     private let switchURLButton = UIButton()
     // MARK: Overrides
     
@@ -60,8 +60,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @objc private func buttonPress(sender: UIButton) {
-        let alert = UIAlertController(title: "Continue to new site?",
-                                      message: "You will be redirected from your current website to:\n" + prevURLString + "\n Continue?",
+        let alert = UIAlertController(title: prevURLString == "" ? "Register new location?" : "Continue to new site?",
+                                      message: prevURLString == "" ? "This land is unclaimed. Claim location?" : "You will be redirected from your current website to:\n" + prevURLString + "\n Continue?",
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Continue",
                                       style: .default,
@@ -85,11 +85,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             couldNotCompleteRequest = true
             // Claimable area
             
-            DispatchQueue.main.sync {
+            DispatchQueue.global().sync {
                 let button = UIButton()
                 button.setImage(#imageLiteral(resourceName: "locationClaim"), for: .normal)
                 button.addTarget(self, action: #selector(self.promptForURLView), for: .touchUpInside)
-                
+            
+            
                 self.webOverlayView.addSubview(button)
                 
                 button.translatesAutoresizingMaskIntoConstraints = false
@@ -113,8 +114,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                                    relatedBy: .equal,
                                    toItem: button,
                                    attribute: .width,
-                                   multiplier: 1.5
-                    ,
+                                   multiplier: 1.5,
                                    constant: 0).isActive = true
                 NSLayoutConstraint(item: button,
                                    attribute: .width,
@@ -125,20 +125,24 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                                    constant: 0).isActive = true
             }
         } else if url != nil {
-            self.webView.loadRequest(URLRequest(url: url!))
+            DispatchQueue.main.async {
+                self.webView.loadRequest(URLRequest(url: url!))
+            }
         } else {
             couldNotCompleteRequest = true
         }
     
     if couldNotCompleteRequest {
-        DispatchQueue.main.sync {
+        DispatchQueue.main.async {
             self.webOverlayView.alpha = 1
         }
         self.webView.loadHTMLString("", baseURL: nil)
     }
-        
-    self.switchURLButton.setImage(#imageLiteral(resourceName: "noLocationsNearby"), for: .normal)
-    self.switchURLButton.isUserInteractionEnabled = false
+    
+    DispatchQueue.main.async {
+        self.switchURLButton.setImage(#imageLiteral(resourceName: "noLocationsNearby"), for: .normal)
+        self.switchURLButton.isUserInteractionEnabled = false
+    }
 }
     
 
@@ -193,12 +197,20 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                     self.prevURLString = urlString
                     self.changeURL()
                 }
-                else if self.prevURLString != urlString {
-                    DispatchQueue.main.sync {
-                        self.switchURLButton.setImage(#imageLiteral(resourceName: "locationNearby"), for: .normal)
-                        self.switchURLButton.isUserInteractionEnabled = true
+                else {
+                    if urlString == "" {
+                        DispatchQueue.main.sync {
+                            self.switchURLButton.setImage(#imageLiteral(resourceName: "locationClaimWhite"), for: .normal)
+                            self.switchURLButton.isUserInteractionEnabled = true
+                        }
+                        self.prevURLString = urlString
+                    } else {
+                        DispatchQueue.main.sync {
+                            self.switchURLButton.setImage(#imageLiteral(resourceName: "locationNearby"), for: .normal)
+                            self.switchURLButton.isUserInteractionEnabled = true
+                        }
+                        self.prevURLString = urlString
                     }
-                    self.prevURLString = urlString
                 }
             }
             
