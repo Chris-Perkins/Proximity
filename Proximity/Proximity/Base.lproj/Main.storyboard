@@ -46,11 +46,11 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wat-w8-C1k">
-                                        <rect key="frame" x="15" y="53" width="46" height="30"/>
+                                        <rect key="frame" x="15" y="53" width="39" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="qXr-wL-eGc"/>
                                         </constraints>
-                                        <state key="normal" title="Button">
+                                        <state key="normal" title="Claim">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>

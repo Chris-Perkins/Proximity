@@ -43,6 +43,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidAppear(animated)
         
         self.setupLocationManager()
+        
+        let button = UIButton()
+        button.setTitle("LMAO", for: .normal)
+        button.addTarget(self, action: #selector(updateCoordinates), for: .touchUpInside)
+        self.view.addSubview(button)
+        rightButtonView.backgroundColor = UIColor.clear
+        NSLayoutConstraint.clingToViewEdges(view: button, toView: rightButtonView)
     }
     
 
@@ -60,7 +67,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     // MARK: Event functions
     
     @IBAction func claimPress(_ sender: Any) {
-        postRequestForLocation(location: locationManager.location!, urlString: "https://www.google.com/")
+        self.promptForURLView()
+    }
+    
+    // Updates the coordinates (debug method)
+    @objc private func updateCoordinates() {
+        self.label.text = String(format: "%d//%d",
+                                 Int(self.locationManager.location!.coordinate.latitude * Constants.multiplier * 100),
+                                 Int(self.locationManager.location!.coordinate.longitude * Constants.multiplier * 100))
     }
     
     // MARK: GET/POST Requests
@@ -85,14 +99,25 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             
             let responseString = String(data: data, encoding: .utf8)
             print(responseString ?? "NIL RESPONSE")
+            
+            var couldNotCompleteRequest = false
             if responseString != nil {
                 let urlString = String(describing: JSON.init(parseJSON: responseString!)["url"])
                 
                 let url = URL(string: urlString)
                 if url != nil {
                     self.webView.loadRequest(URLRequest(url: url!))
+                } else {
+                    couldNotCompleteRequest = true
                 }
+            } else {
+                couldNotCompleteRequest = true
             }
+            
+            if couldNotCompleteRequest {
+                self.webView.loadHTMLString("", baseURL: nil)
+            }
+            
         }
         task.resume()
     }
@@ -148,8 +173,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             
             if status == .authorizedAlways {
                 locationManager.delegate = self
-                locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+                locationManager.desiredAccuracy = kCLLocationAccuracyBest
                 locationManager.startUpdatingLocation()
+                locationManager.startMonitoringSignificantLocationChanges()
                 
             } else if status == .notDetermined {
                 self.locationManager.requestAlwaysAuthorization()
@@ -190,17 +216,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         self.setupLocationManager()
     }
     
-    
-    private func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) -> CLLocation {
-        let locValue:CLLocationCoordinate2D = locationManager.location!.coordinate
-        
-        label.text = "locations = \(locValue.latitude) \(locValue.longitude)"
-        
-        
-        return CLLocation(latitude: locValue.latitude,
-                          longitude: locValue.longitude)
-    }
-    
     // Event function for NoLocation pressed
     private func createNoLocationButton() {
         let button = UIButton()
@@ -210,6 +225,33 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         button.addTarget(self, action: #selector(setupLocationManager), for: .touchUpInside)
         
         self.locationPermissionsButton = button
+    }
+    
+    @objc private func promptForURLView() {
+        let alert = UIAlertController(title: "Web Site for this Location?",
+                                      message: "Please enter a website to display at this location",
+                                      preferredStyle: .alert)
+        alert.addTextField(configurationHandler: {
+            (textField) in
+            textField.text = ""
+            textField.placeholder = "Place valid URL here"
+        })
+        
+        alert.addAction(UIAlertAction(title: "Create!",
+                                      style: .default,
+                                      handler: {
+                                        (_) -> Void in
+                                        let text = alert.textFields![0].text
+                                        if text != nil && text != "" {
+                                            self.postRequestForLocation(location: self.locationManager.location!,
+                                                                        urlString: text!)
+                                        }
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel",
+                                      style: .cancel,
+                                      handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: Repeating queue
