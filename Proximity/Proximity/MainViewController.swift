@@ -29,7 +29,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         
         locationInfoArray = LocationInfo.getLocations()
         
-        getRequestForLocation(location: nil)
+        self.startTimer()
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(willEnterForeground),
@@ -57,8 +57,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     // MARK: GET/POST Requests
     
     // Requests the current location info for this location
-    private func getRequestForLocation(location: CLLocation?) {
-        var request = URLRequest(url: URL(string: "https://proximity-knighthacks.herokuapp.com/url/20/20")!)
+    private func getRequestForLocation(location: CLLocation) {
+        var request = URLRequest(url: URL(string: String(format: (Constants.baseUrl + "/url/%d/%d"),
+                                                         Int(location.coordinate.latitude * Constants.multiplier),
+                                                         Int(location.coordinate.longitude * Constants.multiplier)))!)
         request.httpMethod = "GET"
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -161,6 +163,33 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         button.addTarget(self, action: #selector(setupLocationManager), for: .touchUpInside)
         
         self.locationPermissionsButton = button
+    }
+    
+    // MARK: Repeating queue
+    private func startTimer() {
+        let queue = DispatchQueue(label: "com.firm.app.timer", attributes: .concurrent)
+        
+        timer?.cancel()        // cancel previous timer if any
+        
+        timer = DispatchSource.makeTimerSource(queue: queue)
+        
+        timer?.scheduleRepeating(deadline: .now(), interval: .seconds(20), leeway: .seconds(1))
+        
+        timer?.setEventHandler { [weak self] in
+            
+            if self != nil {
+                if (self!.locationManager.location) != nil {
+                    self!.getRequestForLocation(location: self!.locationManager.location!)
+                }
+            }
+        }
+        
+        timer?.resume()
+    }
+    
+    private func stopTimer() {
+        timer?.cancel()
+        timer = nil
     }
 }
 

@@ -15,6 +15,7 @@
 		221EECC31F8990A700700EAC /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EECC21F8990A700700EAC /* HelperFunctions.swift */; };
 		221EECC51F899CC200700EAC /* SavedLocationClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EECC41F899CC200700EAC /* SavedLocationClass.swift */; };
 		22CFAAF51F89D2000012134F /* AreaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CFAAF41F89D2000012134F /* AreaViewController.swift */; };
+		22CFAAF71F89DAB40012134F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CFAAF61F89DAB40012134F /* Constants.swift */; };
 		7C9EF12D644ADDFF8D4C3FAA /* Pods_Proximity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4D121593033E2FD47287AD9 /* Pods_Proximity.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		221EECC21F8990A700700EAC /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		221EECC41F899CC200700EAC /* SavedLocationClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLocationClass.swift; sourceTree = "<group>"; };
 		22CFAAF41F89D2000012134F /* AreaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaViewController.swift; sourceTree = "<group>"; };
+		22CFAAF61F89DAB40012134F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		38E038452EC97FD5BADAF1FB /* Pods-Proximity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Proximity.release.xcconfig"; path = "Pods/Target Support Files/Pods-Proximity/Pods-Proximity.release.xcconfig"; sourceTree = "<group>"; };
 		C4D121593033E2FD47287AD9 /* Pods_Proximity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Proximity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F685B18C5C6C8A618DEB810D /* Pods-Proximity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Proximity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Proximity/Pods-Proximity.debug.xcconfig"; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				221EECC21F8990A700700EAC /* HelperFunctions.swift */,
 				221EECC41F899CC200700EAC /* SavedLocationClass.swift */,
 				22CFAAF41F89D2000012134F /* AreaViewController.swift */,
+				22CFAAF61F89DAB40012134F /* Constants.swift */,
 			);
 			path = Proximity;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				221EECC51F899CC200700EAC /* SavedLocationClass.swift in Sources */,
 				221EECB11F89848600700EAC /* AppDelegate.swift in Sources */,
 				221EECC31F8990A700700EAC /* HelperFunctions.swift in Sources */,
+				22CFAAF71F89DAB40012134F /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
