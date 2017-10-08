@@ -151,8 +151,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     if couldNotCompleteRequest {
         DispatchQueue.main.async {
             self.webOverlayView.alpha = 1
+            self.webView.loadHTMLString("", baseURL: nil)
         }
-        self.webView.loadHTMLString("", baseURL: nil)
     }
     
     DispatchQueue.main.async {
@@ -213,13 +213,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                     self.prevURLString = urlString
                     self.changeURL()
                 } else {
+                    // If this is empty, user can claim it!!
                     if urlString == "" {
                         DispatchQueue.main.async {
                             self.switchURLButton.setImage(#imageLiteral(resourceName: "locationClaimWhite"), for: .normal)
                             self.switchURLButton.isUserInteractionEnabled = true
                         }
                         self.prevURLString = urlString
-                    } else {
+                    } else if self.prevURLString != urlString { // if this wasn't previously visited, new location!
                         DispatchQueue.main.async {
                             self.switchURLButton.setImage(#imageLiteral(resourceName: "locationNearby"), for: .normal)
                             self.switchURLButton.isUserInteractionEnabled = true
