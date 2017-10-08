@@ -103,8 +103,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
         }
-        
-        
     }
     
     private func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) -> CLLocation {
