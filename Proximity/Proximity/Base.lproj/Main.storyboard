@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tk5-VJ-Nlz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -107,22 +107,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Nq-dd-e3d">
-                                <rect key="frame" x="164" y="20" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                            </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="abp-kq-ptT">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="0Nq-dd-e3d" firstAttribute="top" secondItem="ko8-5v-RLC" secondAttribute="top" id="6MN-Bq-0y4"/>
-                            <constraint firstItem="0Nq-dd-e3d" firstAttribute="centerX" secondItem="ko8-5v-RLC" secondAttribute="centerX" id="BA6-Ur-hQQ"/>
+                            <constraint firstItem="abp-kq-ptT" firstAttribute="trailing" secondItem="ko8-5v-RLC" secondAttribute="trailing" id="8h9-0C-7x3"/>
+                            <constraint firstItem="abp-kq-ptT" firstAttribute="leading" secondItem="ko8-5v-RLC" secondAttribute="leading" id="DlN-UC-Xwy"/>
+                            <constraint firstItem="abp-kq-ptT" firstAttribute="top" secondItem="Bs0-J0-a6c" secondAttribute="top" id="Gyf-ur-ktg"/>
+                            <constraint firstItem="abp-kq-ptT" firstAttribute="bottom" secondItem="ko8-5v-RLC" secondAttribute="bottom" id="IiY-NO-YWX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ko8-5v-RLC"/>
                     </view>
+                    <connections>
+                        <outlet property="map" destination="abp-kq-ptT" id="SF4-Mt-mBe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hed-fa-9Ve" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="817" y="34"/>
+            <point key="canvasLocation" x="816.79999999999995" y="33.733133433283363"/>
         </scene>
     </scenes>
 </document>

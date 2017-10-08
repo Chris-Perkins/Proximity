@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21C8B1901F8A072100C4B4A5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C8B18F1F8A072100C4B4A5 /* CoreLocation.framework */; };
 		221EECB11F89848600700EAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EECB01F89848600700EAC /* AppDelegate.swift */; };
 		221EECB31F89848600700EAC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EECB21F89848600700EAC /* MainViewController.swift */; };
 		221EECB61F89848600700EAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 221EECB41F89848600700EAC /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		21C8B18F1F8A072100C4B4A5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		221EECAD1F89848600700EAC /* Proximity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Proximity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		221EECB01F89848600700EAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		221EECB21F89848600700EAC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21C8B1901F8A072100C4B4A5 /* CoreLocation.framework in Frameworks */,
 				7C9EF12D644ADDFF8D4C3FAA /* Pods_Proximity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,6 +98,7 @@
 		A018DDB5191B4779B7B099A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				21C8B18F1F8A072100C4B4A5 /* CoreLocation.framework */,
 				C4D121593033E2FD47287AD9 /* Pods_Proximity.framework */,
 			);
 			name = Frameworks;

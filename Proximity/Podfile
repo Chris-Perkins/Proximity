@@ -8,4 +8,7 @@ target 'Proximity' do
   # Pods for Proximity
   pod 'SwiftyJSON'
 
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
+
 end
