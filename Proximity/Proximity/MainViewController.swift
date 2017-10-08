@@ -17,10 +17,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var rightButtonView: UIView!
     @IBOutlet weak var claimButton: UIButton!
     
+    // the location manager for this view
     private var locationManager = CLLocationManager()
-    private var locationInfoArray = [LocationInfo]()
+    // the overlayview for the webview (displays 'claim' and 'gps disabled' as necessary)
     private var webOverlayView: UIView = UIView()
+    // timer that loops every 20 seconds
     private var timer: DispatchSourceTimer?
+    // The url string from the previous get request
+    private var prevURLString: String = "Proximity is a cool app. Hire the people who made it. :)"
     
     // MARK: Overrides
     
@@ -34,8 +38,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         
         label.text = "Proximity"
         label.setDefaultProperties()
-        
-        locationInfoArray = LocationInfo.getLocations()
         
         self.startTimer()
         
@@ -73,8 +75,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     // Requests the current location info for this location
     private func getRequestForLocation(location: CLLocation) {
-        webOverlayView.removeAllSubviews()
-        webOverlayView.alpha = 0
+        DispatchQueue.main.sync {
+            self.webOverlayView.removeAllSubviews()
+            self.webOverlayView.alpha = 0
+        }
         
         var request = URLRequest(url: URL(string: String(format: (Constants.baseUrl + "/url/%d/%d"),
                                                          Int(location.coordinate.latitude * Constants.multiplier),
@@ -99,63 +103,68 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             if responseString != nil {
                 let urlString = String(describing: JSON.init(parseJSON: responseString!)["url"])
                 
-                let url = URL(string: urlString)
-                if urlString == "" {
-                    couldNotCompleteRequest = true
+                // Do not reload if we're on the right website.
+                if self.prevURLString != urlString {
+                    self.prevURLString = urlString
                     
-                    DispatchQueue.main.sync {
-                        let button = UIButton()
-                        button.setImage(#imageLiteral(resourceName: "locationClaim"), for: .normal)
-                        button.addTarget(self, action: #selector(self.promptForURLView), for: .touchUpInside)
+                    let url = URL(string: urlString)
+                    if urlString == "" {
+                        couldNotCompleteRequest = true
                         
-                        self.webOverlayView.addSubview(button)
-                        
-                        button.translatesAutoresizingMaskIntoConstraints = false
-                        
-                        NSLayoutConstraint(item: self.webOverlayView,
-                                           attribute: .centerX,
-                                           relatedBy: .equal,
-                                           toItem: button,
-                                           attribute: .centerX,
-                                           multiplier: 1,
-                                           constant: 0).isActive = true
-                        NSLayoutConstraint(item: self.webOverlayView,
-                                           attribute: .centerY,
-                                           relatedBy: .equal,
-                                           toItem: button,
-                                           attribute: .centerY,
-                                           multiplier: 1,
-                                           constant: 0).isActive = true
-                        NSLayoutConstraint(item: self.webOverlayView,
-                                           attribute: .width,
-                                           relatedBy: .equal,
-                                           toItem: button,
-                                           attribute: .width,
-                                           multiplier: 1.5
-                            ,
-                                           constant: 0).isActive = true
-                        NSLayoutConstraint(item: button,
-                                           attribute: .width,
-                                           relatedBy: .equal,
-                                           toItem: button,
-                                           attribute: .height,
-                                           multiplier: 1,
-                                           constant: 0).isActive = true
+                        DispatchQueue.main.sync {
+                            let button = UIButton()
+                            button.setImage(#imageLiteral(resourceName: "locationClaim"), for: .normal)
+                            button.addTarget(self, action: #selector(self.promptForURLView), for: .touchUpInside)
+                            
+                            self.webOverlayView.addSubview(button)
+                            
+                            button.translatesAutoresizingMaskIntoConstraints = false
+                            
+                            NSLayoutConstraint(item: self.webOverlayView,
+                                               attribute: .centerX,
+                                               relatedBy: .equal,
+                                               toItem: button,
+                                               attribute: .centerX,
+                                               multiplier: 1,
+                                               constant: 0).isActive = true
+                            NSLayoutConstraint(item: self.webOverlayView,
+                                               attribute: .centerY,
+                                               relatedBy: .equal,
+                                               toItem: button,
+                                               attribute: .centerY,
+                                               multiplier: 1,
+                                               constant: 0).isActive = true
+                            NSLayoutConstraint(item: self.webOverlayView,
+                                               attribute: .width,
+                                               relatedBy: .equal,
+                                               toItem: button,
+                                               attribute: .width,
+                                               multiplier: 1.5
+                                ,
+                                               constant: 0).isActive = true
+                            NSLayoutConstraint(item: button,
+                                               attribute: .width,
+                                               relatedBy: .equal,
+                                               toItem: button,
+                                               attribute: .height,
+                                               multiplier: 1,
+                                               constant: 0).isActive = true
+                        }
+                    } else if url != nil {
+                        DispatchQueue.main.sync {
+                            self.webView.loadRequest(URLRequest(url: url!))
+                        }
+                    } else {
+                        couldNotCompleteRequest = true
                     }
-                } else if url != nil {
-                    DispatchQueue.main.sync {
-                        self.webView.loadRequest(URLRequest(url: url!))
-                    }
-                } else {
-                    couldNotCompleteRequest = true
                 }
-            } else {
-                couldNotCompleteRequest = true
-            }
-            
-            if couldNotCompleteRequest {
-                self.webOverlayView.alpha = 1
-                self.webView.loadHTMLString("", baseURL: nil)
+                
+                if couldNotCompleteRequest {
+                    DispatchQueue.main.sync {
+                        self.webOverlayView.alpha = 1
+                    }
+                    self.webView.loadHTMLString("", baseURL: nil)
+                }
             }
             
         }

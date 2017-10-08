@@ -314,22 +314,6 @@ extension UITableView {
     }
 }
 
-extension LocationInfo {
-    public static func getLocations() -> [LocationInfo] {
-        var locations = [LocationInfo]()
-        
-        // HEC building
-        locations.append(
-            LocationInfo(location: CLLocation(latitude: 28.60077,
-                                              longitude: -81.197489),
-                         websiteURL: URL(string: "https://map.ucf.edu/locations/116/harris-corporation-engineering-center/")!,
-                         radiusInMeters: 3000))
-        
-        return locations
-        
-    }
-}
-
 extension JSON {
     func jsonToData(json: JSON) -> Data?{
         do {
