@@ -25,9 +25,10 @@ class AreaViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        map.isZoomEnabled = true
-        map.isScrollEnabled = true
-        map.isUserInteractionEnabled = false
+        map.isZoomEnabled = false
+        map.isScrollEnabled = false
+        map.isRotateEnabled = false
+        map.isUserInteractionEnabled = true
         
         gridOverlay = GridTileOverlay()
         gridOverlay.canReplaceMapContent = false
@@ -122,6 +123,8 @@ class AreaViewController: UIViewController, CLLocationManagerDelegate, MKMapView
                             let annotation = MKPointAnnotation()
                             annotation.coordinate = CLLocationCoordinate2D(latitude: Double(key.0.floatValue!) / Constants.multiplier,
                                                                            longitude: Double(key2.0.floatValue!) / Constants.multiplier)
+                            
+                            annotation.subtitle = json[key.0][key2.0].string!
                             self.map.addAnnotation(annotation)
                         }
                     }
