@@ -44,7 +44,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     // Requests the current location info for this location
     private func getRequestForLocation(location: CLLocation?) {
-        var request = URLRequest(url: URL(string: "https://proximity-knighthacks.herokuapp.com/20/20")!)
+        var request = URLRequest(url: URL(string: "https://proximity-knighthacks.herokuapp.com/url/20/20")!)
         request.httpMethod = "GET"
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
