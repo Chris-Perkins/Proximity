@@ -27,15 +27,13 @@
     path.y = mapRect.origin.y*21/tileOverlay.tileSize.width;
     path.z = log2(21)+20;
     
-    //CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:arc4random()%255/255. green:arc4random()%255/255. blue:arc4random()%255/255. alpha:1].CGColor);
-    //CGContextSetLineWidth(context, 1000);
+    CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:arc4random()%255/255. green:arc4random()%255/255. blue:arc4random()%255/255. alpha:0.25].CGColor);
+    CGContextSetLineWidth(context, 1000);
     CGContextStrokeRect(context, rect);
     NSLog(@"X=%d\nY=%d\nZ=%d",path.x,path.y,path.z);
     
     UIGraphicsPushContext(context);
     NSString *text = [NSString stringWithFormat:@"X=%d\nY=%d\nZ=%d",path.x,path.y,path.z];
-    [text drawInRect:rect withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:10],
-                                           NSForegroundColorAttributeName:[UIColor blackColor]}];
     UIGraphicsPopContext();
     
 }
