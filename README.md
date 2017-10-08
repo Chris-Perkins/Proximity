@@ -3,7 +3,7 @@
 ## The Application
 ### _You could open four or five apps, or just one_
 
- Designed as the single application for consumers to explore businesses, Proximity is the community amalgamation.  No longer do users need to download one app per business that they like.  Instead, all businesses can house their application within Proximity.  Using our app, users are directed to a home page with all apps that they star, and they can manually navigate to any business' current in-house application.  Additionally, Proximity provides location-based business adsense and services by using the phone's GPS coordinates.  If a user comes within proximity of a business, that business's custom application or webpage appears (such as a menu or a special discount).  This encourages users to walk to business locations rather than shop online, thus giving businesses better opportunitys to provide positive experiences.  
+ Designed as the only necessary application for consumers to explore businesses, Proximity is the community amalgamation.  No longer do users need to download one app per business that they like.  Instead, all businesses can house their application within Proximity.  Using our app, users are directed to a home page with all apps that they star and they can manually navigate to any business' current in-house application.  Additionally, Proximity provides location-based business adsense and services by using the phone's GPS coordinates.  If a user comes within proximity of a business, that business's custom application or webpage appears (such as a menu or a special discount).  This encourages users to walk to business locations rather than shop online, thus giving businesses better opportunitys to provide positive experiences.  
 
 ### _/r/place_
  
