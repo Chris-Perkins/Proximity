@@ -23,20 +23,10 @@ class AreaViewController: UIViewController, CLLocationManagerDelegate {
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
-        
-        print("yeaaaaaaaaaaa")
-        
-        let span:MKCoordinateSpan = MKCoordinateSpanMake(1, 1)
-        let myLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(120.230, 300.53)
-        let region:MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
-        
-        map.setRegion(region, animated: true)
-        self.map.showsUserLocation = true
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
-        print("yeaaaaaaaaaaa")
         let location = locations[0]
         
         let span:MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
