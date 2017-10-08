@@ -25,7 +25,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     private var timer: DispatchSourceTimer?
     // The url string from the previous get request
     private var prevURLString: String = "Proximity is a cool app. Hire the people who made it. :)"
-    
+    private let switchURLButton = UIButton()
     // MARK: Overrides
     
     override func viewDidLoad() {
@@ -44,21 +44,102 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(willEnterForeground),
                                                name: .UIApplicationWillEnterForeground, object: nil)
-        postRequestForLocation(location: locationManager.location!, urlString: "urgay")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         self.setupLocationManager()
-        
-        let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "noLocationsNearby"), for: .normal)
-        //button.addTarget(self, action: #selector(updateCoordinates), for: .touchUpInside)
-        self.view.addSubview(button)
+
+        switchURLButton.setImage(#imageLiteral(resourceName: "noLocationsNearby"), for: .normal)
+        switchURLButton.isUserInteractionEnabled = false
+        switchURLButton.addTarget(self, action: #selector(buttonPress(sender:)), for: .touchUpInside)
+        self.view.addSubview(switchURLButton)
         rightButtonView.backgroundColor = UIColor.clear
-        NSLayoutConstraint.clingToViewEdges(view: button, toView: rightButtonView)
+        NSLayoutConstraint.clingToViewEdges(view: switchURLButton, toView: rightButtonView)
     }
+    
+    @objc private func buttonPress(sender: UIButton) {
+        let alert = UIAlertController(title: "Continue to new site?",
+                                      message: "You will be redirected from your current website to:\n" + prevURLString + "\n Continue?",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Continue",
+                                      style: .default,
+                                      handler: {
+                                        (_) -> Void in
+                                        self.changeURL()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel",
+                                      style: .cancel,
+                                      handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func changeURL()
+    {
+        var couldNotCompleteRequest = false
+        
+        let url = URL(string: prevURLString)
+        if prevURLString == "" {
+            couldNotCompleteRequest = true
+            // Claimable area
+            
+            DispatchQueue.main.sync {
+                let button = UIButton()
+                button.setImage(#imageLiteral(resourceName: "locationClaim"), for: .normal)
+                button.addTarget(self, action: #selector(self.promptForURLView), for: .touchUpInside)
+                
+                self.webOverlayView.addSubview(button)
+                
+                button.translatesAutoresizingMaskIntoConstraints = false
+                
+                NSLayoutConstraint(item: self.webOverlayView,
+                                   attribute: .centerX,
+                                   relatedBy: .equal,
+                                   toItem: button,
+                                   attribute: .centerX,
+                                   multiplier: 1,
+                                   constant: 0).isActive = true
+                NSLayoutConstraint(item: self.webOverlayView,
+                                   attribute: .centerY,
+                                   relatedBy: .equal,
+                                   toItem: button,
+                                   attribute: .centerY,
+                                   multiplier: 1,
+                                   constant: 0).isActive = true
+                NSLayoutConstraint(item: self.webOverlayView,
+                                   attribute: .width,
+                                   relatedBy: .equal,
+                                   toItem: button,
+                                   attribute: .width,
+                                   multiplier: 1.5
+                    ,
+                                   constant: 0).isActive = true
+                NSLayoutConstraint(item: button,
+                                   attribute: .width,
+                                   relatedBy: .equal,
+                                   toItem: button,
+                                   attribute: .height,
+                                   multiplier: 1,
+                                   constant: 0).isActive = true
+            }
+        } else if url != nil {
+            self.webView.loadRequest(URLRequest(url: url!))
+        } else {
+            couldNotCompleteRequest = true
+        }
+    
+    if couldNotCompleteRequest {
+        DispatchQueue.main.sync {
+            self.webOverlayView.alpha = 1
+        }
+        self.webView.loadHTMLString("", baseURL: nil)
+    }
+        
+    self.switchURLButton.setImage(#imageLiteral(resourceName: "noLocationsNearby"), for: .normal)
+    self.switchURLButton.isUserInteractionEnabled = false
+}
     
 
     override func didReceiveMemoryWarning() {
@@ -100,71 +181,24 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             let responseString = String(data: data, encoding: .utf8)
             print(responseString ?? "NIL RESPONSE")
             
-            var couldNotCompleteRequest = false
+            
             if responseString != nil {
                 let urlString = String(describing: JSON.init(parseJSON: responseString!)["url"])
                 
-                // Do not reload if we're on the right website.
-                if self.prevURLString != urlString {
-                    self.prevURLString = urlString
-                    
-                    let url = URL(string: urlString)
-                    if urlString == "" {
-                        couldNotCompleteRequest = true
-                        
-                        DispatchQueue.main.sync {
-                            let button = UIButton()
-                            button.setImage(#imageLiteral(resourceName: "locationClaim"), for: .normal)
-                            button.addTarget(self, action: #selector(self.promptForURLView), for: .touchUpInside)
-                            
-                            self.webOverlayView.addSubview(button)
-                            
-                            button.translatesAutoresizingMaskIntoConstraints = false
-                            
-                            NSLayoutConstraint(item: self.webOverlayView,
-                                               attribute: .centerX,
-                                               relatedBy: .equal,
-                                               toItem: button,
-                                               attribute: .centerX,
-                                               multiplier: 1,
-                                               constant: 0).isActive = true
-                            NSLayoutConstraint(item: self.webOverlayView,
-                                               attribute: .centerY,
-                                               relatedBy: .equal,
-                                               toItem: button,
-                                               attribute: .centerY,
-                                               multiplier: 1,
-                                               constant: 0).isActive = true
-                            NSLayoutConstraint(item: self.webOverlayView,
-                                               attribute: .width,
-                                               relatedBy: .equal,
-                                               toItem: button,
-                                               attribute: .width,
-                                               multiplier: 1.5
-                                ,
-                                               constant: 0).isActive = true
-                            NSLayoutConstraint(item: button,
-                                               attribute: .width,
-                                               relatedBy: .equal,
-                                               toItem: button,
-                                               attribute: .height,
-                                               multiplier: 1,
-                                               constant: 0).isActive = true
-                        }
-                    } else if url != nil {
-                        DispatchQueue.main.sync {
-                            self.webView.loadRequest(URLRequest(url: url!))
-                        }
-                    } else {
-                        couldNotCompleteRequest = true
-                    }
-                }
+                //if urlString != prev, save the url
+                //let the icon glow
                 
-                if couldNotCompleteRequest {
+                // Do not reload if we're on the right website.
+                if self.prevURLString == "" && urlString != "" {
+                    self.prevURLString = urlString
+                    self.changeURL()
+                }
+                else if self.prevURLString != urlString {
                     DispatchQueue.main.sync {
-                         self.webOverlayView.alpha = 1
+                        self.switchURLButton.setImage(#imageLiteral(resourceName: "locationNearby"), for: .normal)
+                        self.switchURLButton.isUserInteractionEnabled = true
                     }
-                    self.webView.loadHTMLString("", baseURL: nil)
+                    self.prevURLString = urlString
                 }
             }
             
@@ -187,9 +221,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         } catch let error as NSError {
             print("Error: \(error.localizedDescription)")
         } catch {}
-        
-        
-        request.value(forHTTPHeaderField: "Content-Type: application/json")
         
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
