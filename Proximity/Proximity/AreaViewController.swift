@@ -19,6 +19,10 @@ class AreaViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     var gridData: JSON?
     
     private var timer: DispatchSourceTimer?
+    
+    @IBAction func backButtonPress(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
 
     let manager = CLLocationManager()
     
