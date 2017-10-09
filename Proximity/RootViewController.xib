@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13526" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RootViewController">
+            <connections>
+                <outlet property="mapView" destination="ED6-ya-Chq" id="ILz-he-SLm"/>
+                <outlet property="view" destination="1" id="3"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ED6-ya-Chq">
+                    <rect key="frame" x="0.0" y="-1" width="320" height="574"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="TpJ-0r-7ew"/>
+                    </connections>
+                </mapView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="ED6-ya-Chq" secondAttribute="bottom" constant="-6" id="5d3-GZ-NFD"/>
+                <constraint firstItem="ED6-ya-Chq" firstAttribute="top" secondItem="1" secondAttribute="top" id="Emn-uM-dbf"/>
+                <constraint firstAttribute="trailing" secondItem="ED6-ya-Chq" secondAttribute="trailing" id="H8L-ye-rz6"/>
+                <constraint firstItem="ED6-ya-Chq" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="K9A-Gf-u2i"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

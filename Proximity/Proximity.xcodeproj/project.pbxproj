@@ -35,7 +35,7 @@
 		21DC48121F8A447A00735E49 /* WatermarkTileOverlayRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatermarkTileOverlayRenderer.h; sourceTree = "<group>"; };
 		21DC48131F8A449200735E49 /* WatermarkTileOverlayRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WatermarkTileOverlayRenderer.m; sourceTree = "<group>"; };
 		21DC48151F8A44B500735E49 /* GridTileOverlayRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GridTileOverlayRenderer.h; sourceTree = "<group>"; };
-		21DC48161F8A454700735E49 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RootViewController.xib; path = ../../RootViewController.xib; sourceTree = "<group>"; };
+		21DC48161F8A454700735E49 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RootViewController.xib; path = ../RootViewController.xib; sourceTree = "<group>"; };
 		221EECAD1F89848600700EAC /* Proximity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Proximity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		221EECB01F89848600700EAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		221EECB21F89848600700EAC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
