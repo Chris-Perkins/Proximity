@@ -35,7 +35,7 @@
 		21DC48121F8A447A00735E49 /* WatermarkTileOverlayRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatermarkTileOverlayRenderer.h; sourceTree = "<group>"; };
 		21DC48131F8A449200735E49 /* WatermarkTileOverlayRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WatermarkTileOverlayRenderer.m; sourceTree = "<group>"; };
 		21DC48151F8A44B500735E49 /* GridTileOverlayRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GridTileOverlayRenderer.h; sourceTree = "<group>"; };
-		21DC48161F8A454700735E49 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RootViewController.xib; path = ../RootViewController.xib; sourceTree = "<group>"; };
+		21DC48161F8A454700735E49 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		221EECAD1F89848600700EAC /* Proximity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Proximity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		221EECB01F89848600700EAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		221EECB21F89848600700EAC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -87,25 +87,57 @@
 			children = (
 				21DC48071F8A43D300735E49 /* Proximity-Bridging-Header.h */,
 				221EECB01F89848600700EAC /* AppDelegate.swift */,
-				221EECB21F89848600700EAC /* MainViewController.swift */,
-				221EECB41F89848600700EAC /* Main.storyboard */,
+				2256B24B1F9A833300A11CB5 /* Storyboards and XIBs */,
+				2256B24C1F9A834300A11CB5 /* Custom Map Overlay */,
+				2256B24D1F9A837D00A11CB5 /* Helper Files */,
+				2256B24E1F9A83B200A11CB5 /* View Controllers */,
 				221EECB71F89848600700EAC /* Assets.xcassets */,
-				221EECB91F89848600700EAC /* LaunchScreen.storyboard */,
 				221EECBC1F89848600700EAC /* Info.plist */,
-				221EECC21F8990A700700EAC /* HelperFunctions.swift */,
-				22CFAAF41F89D2000012134F /* AreaViewController.swift */,
-				22CFAAF61F89DAB40012134F /* Constants.swift */,
+			);
+			path = Proximity;
+			sourceTree = "<group>";
+		};
+		2256B24B1F9A833300A11CB5 /* Storyboards and XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				21DC48161F8A454700735E49 /* RootViewController.xib */,
+				221EECB41F89848600700EAC /* Main.storyboard */,
+				221EECB91F89848600700EAC /* LaunchScreen.storyboard */,
+			);
+			path = "Storyboards and XIBs";
+			sourceTree = "<group>";
+		};
+		2256B24C1F9A834300A11CB5 /* Custom Map Overlay */ = {
+			isa = PBXGroup;
+			children = (
 				21DC480B1F8A440B00735E49 /* RootViewController.h */,
 				21DC48081F8A43D400735E49 /* RootViewController.m */,
 				21DC480C1F8A442300735E49 /* GridTileOverlay.h */,
 				21DC480D1F8A443800735E49 /* GridTileOverlay.m */,
-				21DC48101F8A446200735E49 /* GridTileOverlayRenderer.m */,
 				21DC48121F8A447A00735E49 /* WatermarkTileOverlayRenderer.h */,
-				21DC48131F8A449200735E49 /* WatermarkTileOverlayRenderer.m */,
+				21DC48101F8A446200735E49 /* GridTileOverlayRenderer.m */,
 				21DC48151F8A44B500735E49 /* GridTileOverlayRenderer.h */,
-				21DC48161F8A454700735E49 /* RootViewController.xib */,
+				21DC48131F8A449200735E49 /* WatermarkTileOverlayRenderer.m */,
 			);
-			path = Proximity;
+			path = "Custom Map Overlay";
+			sourceTree = "<group>";
+		};
+		2256B24D1F9A837D00A11CB5 /* Helper Files */ = {
+			isa = PBXGroup;
+			children = (
+				22CFAAF61F89DAB40012134F /* Constants.swift */,
+				221EECC21F8990A700700EAC /* HelperFunctions.swift */,
+			);
+			path = "Helper Files";
+			sourceTree = "<group>";
+		};
+		2256B24E1F9A83B200A11CB5 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				221EECB21F89848600700EAC /* MainViewController.swift */,
+				22CFAAF41F89D2000012134F /* AreaViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		39F076BE510FE5767EFC2A46 /* Pods */ = {
